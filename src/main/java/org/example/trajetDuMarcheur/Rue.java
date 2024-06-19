@@ -1,29 +1,26 @@
 package org.example.trajetDuMarcheur;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 
+@Data
 @Getter
-@Setter
-@AllArgsConstructor
+@EqualsAndHashCode
 public class Rue {
-    private final String nomDeLaRue;
+    private final String nom;
     private final Lieu lieuA;
     private final Lieu lieuB;
 
-    public Rue(Lieu lieuA, Lieu lieuB) {
-        this.nomDeLaRue= null;
+    public Rue(String nom, Lieu lieuA, Lieu lieuB) {
+        this.nom = nom;
         this.lieuA = lieuA;
         this.lieuB = lieuB;
+        lieuA.ajouterRue(this);
+        lieuB.ajouterRue(this);
     }
 
-    public Lieu allerAutreLieu(Lieu lieu) {
-        if (lieu.equals(lieuA)) {
-            return lieuB;
-        } else if (lieu.equals(lieuB)) {
-            return lieuA;
-        }
-        return null;
+    public Rue(Lieu lieuA, Lieu lieuB) {
+        this("", lieuA, lieuB);
     }
 }
