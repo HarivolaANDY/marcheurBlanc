@@ -1,27 +1,32 @@
 package org.example.trajetDuMarcheur;
 
-import lombok.Getter;
+import lombok.Data;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Getter
-public record Lieu(String nom) {
-    private static List<Rue> ruesAdjacentes;
+@Data
+public class Lieu {
+    private final String nom;
+    private final Set<Rue> rues = new HashSet<>();
 
     public Lieu(String nom) {
         this.nom = nom;
-        ruesAdjacentes = new ArrayList<>();
     }
 
-    public List<Rue> getRuesAdjacentes() {
-        return ruesAdjacentes;
+    public void ajouterRue(Rue rue) {
+        rues.add(rue);
     }
-    public void ajouterRueAdjacente(Rue rue) {
-        ruesAdjacentes.add(rue);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lieu lieu = (Lieu) o;
+        return Objects.equals(nom, lieu.nom);
     }
 
-    public String getNom() {
-        return nom;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nom);
     }
 }
