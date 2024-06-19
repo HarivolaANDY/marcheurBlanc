@@ -1,16 +1,13 @@
 package org.example.trajetDuMarcheur;
 
-import java.util.List;
+import lombok.Data;
+import java.util.Set;
 
-public record Carte(List<Rue> rues)  {
+@Data
+public class Carte {
+    private final Set<Rue> rues;
 
-    public void ajouterLieu(Lieu depart) {
-        Lieu lieu= depart;
-        rues.add(new Rue(lieu, null));
-    }
-
-    public void ajouterRue(Rue rue) {
-        Rue rue1= rue;
-        rues.add()
+    public Carte(Set<Rue> rues) {
+        this.rues = rues;
     }
 }
